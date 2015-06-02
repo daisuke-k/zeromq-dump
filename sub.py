@@ -7,7 +7,7 @@ LOG = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("-s", "--subscribe", help="host to connect for subscribe",
+    parser.add_argument("-c", "--connect", help="host to connect for subscribe",
             required=True, action="append", type=str, metavar="URL")
     args = parser.parse_args()
 
@@ -18,7 +18,7 @@ if __name__ == "__main__":
     context = zmq.Context()
     poller = zmq.Poller()
 
-    for host in args.subscribe:
+    for host in args.connect:
         sock = context.socket(zmq.SUB)
         sock.connect(host)
         sock.setsockopt(zmq.SUBSCRIBE, b'')
